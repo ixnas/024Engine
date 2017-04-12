@@ -7,22 +7,22 @@ void Game::setCamera () {
 	auto freeCameraSpeed = 10;
 	if (inputController->keyPressed (SDLK_0)) {
 		if (inputController->keyPressed (SDLK_a)) {
-			camera.shiftH (-freeCameraSpeed);
+			camera->shiftH (-freeCameraSpeed);
 		} if (inputController->keyPressed (SDLK_d)) {
-			camera.shiftH (freeCameraSpeed);
+			camera->shiftH (freeCameraSpeed);
 		} if (inputController->keyPressed (SDLK_w)) {
-			camera.shiftV (-freeCameraSpeed);
+			camera->shiftV (-freeCameraSpeed);
 		} if (inputController->keyPressed (SDLK_s)) {
-			camera.shiftV (freeCameraSpeed);
+			camera->shiftV (freeCameraSpeed);
 		}
 	} else {
 		if (players->size () > 0) {
 			auto x = (*players) [0]->getX ()-GraphicsEngine::instance ()->getFrameWidth ()/3;
 			auto y = (*players) [0]->getY ()-GraphicsEngine::instance ()->getFrameHeight ()/20*11;
 			if (x > 0) {
-				camera.setPosition (x, y);
+				camera->setPosition (x, y);
 			} else {
-				camera.setPosition (0, y);
+				camera->setPosition (0, y);
 			}
 		}
 	}
@@ -39,10 +39,10 @@ void Game::prepareCameraAndObjects () {
 
 bool Game::checkObjectWithinCamera (const int objectX, const int objectY, const int objectW, const int objectH) {
 	if (
-		objectX + objectW > -camera.getOffsetX () &&
-        objectX < -camera.getOffsetX () + GraphicsEngine::instance ()->getFrameWidth () &&
-        objectY + objectH > -camera.getOffsetY () &&
-        objectY < -camera.getOffsetY () + GraphicsEngine::instance ()->getFrameHeight ()) {
+		objectX + objectW > -camera->getOffsetX () &&
+        objectX < -camera->getOffsetX () + GraphicsEngine::instance ()->getFrameWidth () &&
+        objectY + objectH > -camera->getOffsetY () &&
+        objectY < -camera->getOffsetY () + GraphicsEngine::instance ()->getFrameHeight ()) {
 		return true;
 	} else {
 		return false;
@@ -50,8 +50,8 @@ bool Game::checkObjectWithinCamera (const int objectX, const int objectY, const 
 }
 
 void Game::drawBackground () {
-	auto x = camera.getOffsetX ()/2;
-	auto y = camera.getOffsetY ()/2 - GraphicsEngine::instance ()->getFrameHeight ()*2;
+	auto x = camera->getOffsetX ()/2;
+	auto y = camera->getOffsetY ()/2 - GraphicsEngine::instance ()->getFrameHeight ()*2;
 	auto w = GraphicsEngine::instance ()->getFrameWidth ()*4;
 	auto h = GraphicsEngine::instance ()->getFrameHeight ()*4;
 
@@ -66,7 +66,7 @@ void Game::drawObjects (std::shared_ptr <std::vector <std::shared_ptr <GameObjec
 		auto h = (*objects) [i]->getStretchedH ();
 
 		if (checkObjectWithinCamera (x, y, w, h)) {
-			(*objects) [i]->render (camera.getOffsetX (), camera.getOffsetY ());
+			(*objects) [i]->render (camera->getOffsetX (), camera->getOffsetY ());
 		}
 	}
 }
@@ -104,12 +104,12 @@ void Game::prepareObjects (std::shared_ptr <std::vector <std::shared_ptr <GameOb
 	}
 }
 
-Game::Game (std::shared_ptr <InputController> inputController, std::shared_ptr <CollisionController> collisionController, int background)
+Game::Game (std::shared_ptr <InputController> inputController, std::shared_ptr <CollisionController> collisionController, std::unique_ptr <Camera> camera, int background)
 : inputController (inputController)
 , gameObjects (std::make_shared <std::vector <std::shared_ptr <GameObject> > > ())
 , gameObjectsForeground (std::make_shared <std::vector <std::shared_ptr <GameObject> > > ())
 , players (std::make_shared <std::vector <std::shared_ptr <GameObject> > > ())
-, camera (Camera (0, 0, 5, 5))
+, camera (std::move (camera))
 , collisionController (collisionController)
 , blockx (GraphicsEngine::instance ()->getBlockSizeX ())
 , blocky (GraphicsEngine::instance ()->getBlockSizeY ())

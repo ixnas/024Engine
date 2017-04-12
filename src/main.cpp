@@ -1,6 +1,7 @@
 #include <chrono>
 #include <zconf.h>
 #include "../include/FPSCounter.h"
+#include "../include/Camera.h"
 #include "../include/Game.h"
 #include "../include/Crate.h"
 #include "../include/Tree.h"
@@ -57,17 +58,17 @@ void loadGame (std::shared_ptr <Game> game) {
 	GraphicsEngine::instance ()->loadFont ("fonts/OpenSans-Regular.ttf", 12);
 	AssetLoader::instance ()->getExplosionAsset ();
 
-	int minX = 0;
-	int maxX = 32;
-	int minY = 17;
-	int maxY = 512;
+	auto minX = 0;
+	auto maxX = 32;
+	auto minY = 17;
+	auto maxY = 512;
 
 	game->addGameObject (std::make_shared <GroundTopLeft> (minX, minY));
-	for (int i = minY + 4; i < maxY; i = i + 4) {
+	for (auto i = minY + 4; i < maxY; i = i + 4) {
 		game->addGameObject (std::make_shared <GroundMiddleLeft> (minX, i));
 	}
 
-	for (int i = minX + 4; i < maxX; i = i + 4) {
+	for (auto i = minX + 4; i < maxX; i = i + 4) {
 		game->addGameObject (std::make_shared <GroundTop> (i, minY));
 		for (int j = minY + 4; j < maxY; j = j + 4) {
 			game->addGameObject (std::make_shared <GroundMiddle> (i, j));
@@ -79,7 +80,7 @@ void loadGame (std::shared_ptr <Game> game) {
 	game->addGameObject (std::make_shared <PlatformRight> (44, 11));
 
 	game->addGameObject (std::make_shared <GroundTopRight> (maxX, minY));
-	for (int i = minY + 4; i < maxY; i = i + 4) {
+	for (auto i = minY + 4; i < maxY; i = i + 4) {
 		game->addGameObject (std::make_shared <GroundMiddleRight> (maxX, i));
 	}
 
@@ -118,12 +119,13 @@ int main () {
 
 	drawTitleScreen ();
 
+	auto camera = std::make_unique <Camera> (0, 0, 5, 5);
 	auto inputControllerFactory = std::make_unique <InputControllerFactory> ();
 	auto inputController (inputControllerFactory->getInputController ("KeyboardController"));
 	auto collisionController = std::make_shared <CollisionController> ();
 	auto background = GraphicsEngine::instance ()->loadMedia (BACKGROUND_PATH);
 
-	auto game (std::make_shared <Game> (inputController, collisionController, background));
+	auto game (std::make_shared <Game> (inputController, collisionController, std::move (camera), background));
 
 	/* Add game assets and objects */
 	loadGame (game);

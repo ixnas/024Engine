@@ -13,7 +13,7 @@
 class Game {
 	private:
 		std::shared_ptr <InputController> inputController;
-		Camera camera;
+		std::unique_ptr <Camera> camera;
 		std::shared_ptr <std::vector <std::shared_ptr <GameObject> > > gameObjects;
 		std::shared_ptr <std::vector <std::shared_ptr <GameObject> > > gameObjectsForeground;
 		std::shared_ptr <std::vector <std::shared_ptr <GameObject> > > players;
@@ -29,7 +29,7 @@ class Game {
 		void drawWatermark ();
 		void prepareObjects (std::shared_ptr <std::vector <std::shared_ptr <GameObject> > > objects);
 	public:
-		Game (std::shared_ptr <InputController> inputController, std::shared_ptr <CollisionController> collisionController, int background);
+		Game (std::shared_ptr <InputController> inputController, std::shared_ptr <CollisionController> collisionController, std::unique_ptr <Camera> camera, int background);
 		void loop ();
 		void addGameObject (std::shared_ptr <GameObject> gameObject);
 		void addGameObjectForeground (std::shared_ptr <GameObject> gameObject);
