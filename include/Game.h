@@ -18,15 +18,15 @@ class Game {
 		std::shared_ptr <std::vector <std::shared_ptr <GameObject> > > gameObjectsForeground;
 		std::shared_ptr <std::vector <std::shared_ptr <GameObject> > > players;
 		std::shared_ptr <CollisionController> collisionController;
-		int blockx, blocky;
-		int background;
-		int watermark;
+		const int blockX, blockY;
+		const int background;
+		int watermark; // to be removed
 		void setCamera ();
 		void prepareCameraAndObjects ();
 		bool checkObjectWithinCamera (const int objectX, const int objectY, const int objectW, const int objectH);
 		void drawObjects (std::shared_ptr <std::vector <std::shared_ptr <GameObject> > > objects);
 		void drawBackground ();
-		void drawWatermark ();
+		void drawWatermark (); // to be removed
 		void prepareObjects (std::shared_ptr <std::vector <std::shared_ptr <GameObject> > > objects);
 	public:
 		Game (std::shared_ptr <InputController> inputController, std::shared_ptr <CollisionController> collisionController, std::unique_ptr <Camera> camera, const int background);

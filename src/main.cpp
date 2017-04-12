@@ -106,8 +106,8 @@ int main () {
 
 	/* GLOBAL SETTINGS */
 	const char TITLE [] = "30-03-2017";
-	const auto RESOLUTION_X = 1920;
-	const auto RESOLUTION_Y = 1080;
+	const auto RESOLUTION_X = 1280;
+	const auto RESOLUTION_Y = 720;
 	const auto BLOCKS_X = 32;
 	const auto BLOCKS_Y = 18;
 	const char BACKGROUND_PATH [] = "assets/background2.png";

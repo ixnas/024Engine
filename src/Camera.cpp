@@ -12,35 +12,35 @@ Camera::~Camera () {
 }
 
 void Camera::setSpeed (const int speedX, const int speedY) {
-	this->speedx = speedX;
-	this->speedy = speedY;
+	this->speedX = speedX;
+	this->speedY = speedY;
 }
 
 void Camera::setPosition (const int x, const int y) {
 	this->x = x;
 	this->y = y;
-	this->targetx = x;
-	this->targety = y;
+	this->targetX = x;
+	this->targetY = y;
 }
 
 void Camera::setTarget (const int x, const int y) {
-	this->targetx = x;
-	this->targety = y;
+	this->targetX = x;
+	this->targetY = y;
 }
 
 void Camera::moveToTarget () {
-	for (int i = 0; i < speedx; i++) {
-		if (x < targetx) {
+	for (int i = 0; i < speedX; i++) {
+		if (x < targetX) {
 			x++;
-		} else if (x > targetx) {
+		} else if (x > targetX) {
 			x--;
 		}
 	}
 
-	for (int i = 0; i < speedy; i++) {
-		if (y < targety) {
+	for (int i = 0; i < speedY; i++) {
+		if (y < targetY) {
 			y++;
-		} else if (y > targety) {
+		} else if (y > targetY) {
 			y--;
 		}
 	}

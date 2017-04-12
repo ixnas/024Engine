@@ -3,7 +3,7 @@
 
 class Camera {
 	private:
-		int x, y, targetx, targety, speedx, speedy;
+		int x, y, targetX, targetY, speedX, speedY;
 	public:
 		Camera (const int x, const int y, const int speedX, const int speedY);
 		~Camera ();

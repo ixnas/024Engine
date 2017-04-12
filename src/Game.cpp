@@ -111,8 +111,8 @@ Game::Game (std::shared_ptr <InputController> inputController, std::shared_ptr <
 , players (std::make_shared <std::vector <std::shared_ptr <GameObject> > > ())
 , camera (std::move (camera))
 , collisionController (collisionController)
-, blockx (GraphicsEngine::instance ()->getBlockSizeX ())
-, blocky (GraphicsEngine::instance ()->getBlockSizeY ())
+, blockX (GraphicsEngine::instance ()->getBlockSizeX ())
+, blockY (GraphicsEngine::instance ()->getBlockSizeY ())
 , background (background)
 {
 	assert (inputController != nullptr);
@@ -120,7 +120,7 @@ Game::Game (std::shared_ptr <InputController> inputController, std::shared_ptr <
 
 	GraphicsEngine::instance ()->loadFont ("fonts/HighlandGothicLightFLF.ttf", 128);
 	collisionController->setGameObjects (gameObjects);
-	players->push_back (std::make_shared <PlayableCharacter> (inputController, collisionController, SDLK_LEFT, SDLK_RIGHT, SDLK_SPACE, 24, 12, blockx/4, blocky/2, blocky/2, 2, 13, 2, 4, 2, 0.4));
+	players->push_back (std::make_shared <PlayableCharacter> (inputController, collisionController, SDLK_LEFT, SDLK_RIGHT, SDLK_SPACE, 24, 12, blockX/4, blockY/2, blockY/2, 2, 13, 2, 4, 2, 0.4));
 	watermark = GraphicsEngine::instance ()->loadText (0, "024 Engine [April]", 0, 0, 0);
 }
 
