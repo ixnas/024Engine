@@ -4,7 +4,7 @@
 
 #include "../include/GroundMiddleLeft.h"
 
-GroundMiddleLeft::GroundMiddleLeft (int x, int y)
+GroundMiddleLeft::GroundMiddleLeft (const int x, const int y)
 : GameObject (AssetLoader::instance ()->getGroundAssetMiddleLeft (), 3, x, y, 4, 4, 0, 0, true)
 {
 

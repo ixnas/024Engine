@@ -14,8 +14,8 @@ void TemporaryGameObject::nextLifeFrame () {
 }
 
 TemporaryGameObject::TemporaryGameObject (std::vector <int> textures,
-                                          int maxSpriteFrames, int maxLifeFrames, int x, int y, int w, int h,
-                                          float stretchW, float stretchH, bool collidable)
+                                          const int maxSpriteFrames, const int maxLifeFrames, const int x, const int y, const int w, const int h,
+                                          const float stretchW, const float stretchH, const bool collidable)
 : GameObject (textures, maxSpriteFrames, x, y, w, h, stretchW, stretchH, collidable)
 , maxLifeFrames (maxLifeFrames)
 , passedLifeFrames (1)

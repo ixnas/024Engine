@@ -9,7 +9,7 @@
 
 class Tree : public GameObject {
 	public:
-		Tree (int x, int y);
+		Tree (const int x, const int y);
 };
 
 #endif

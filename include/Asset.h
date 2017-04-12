@@ -9,7 +9,7 @@ class Asset {
 		std::string name;
 		std::vector <int> textures;
 	public:
-		Asset (const char *name);
+		Asset (const std::string name);
 		std::string getName ();
 		std::vector <int> getTextures ();
 		void addTexture (const int textureNumber);

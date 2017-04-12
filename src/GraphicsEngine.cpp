@@ -159,9 +159,9 @@ int GraphicsEngine::loadMedia (const char* path) {
 	}
 }
 
-int GraphicsEngine::loadText (const int fontnumber, const char *text, const Uint8 r, const Uint8 g, const Uint8 b) {
+int GraphicsEngine::loadText (const int fontnumber, const std::string text, const Uint8 r, const Uint8 g, const Uint8 b) {
 	SDL_Color color = {r, g, b};
-	SDL_Surface *surfaceMessage = TTF_RenderText_Solid (fonts [fontnumber], text, color);
+	SDL_Surface *surfaceMessage = TTF_RenderText_Solid (fonts [fontnumber], text.c_str (), color);
 	SDL_Texture *textureMessage = NULL;
 	if (surfaceMessage == NULL) {
 		std::cout << "Couldn't render text: " << TTF_GetError () << std::endl;

@@ -1,6 +1,6 @@
 #include "../include/Asset.h"
 
-Asset::Asset (const char *name)
+Asset::Asset (const std::string name)
 {
 	this->name = name;
 }

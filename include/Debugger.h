@@ -11,7 +11,7 @@ class Debugger {
 		std::vector <int> values;
 		std::vector <int> valueTextures;
 	public:
-		Debugger (const char *name, int *value, const int min, const int max);
+		Debugger (std::string name, int *value, const int min, const int max);
 		int getName ();
 		int getValue ();
 };

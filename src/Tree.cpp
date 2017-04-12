@@ -4,7 +4,7 @@
 
 #include "../include/Tree.h"
 
-Tree::Tree (int x, int y)
+Tree::Tree (const int x, const int y)
 : GameObject (AssetLoader::instance ()->getTreeAsset (), 3, x, y, 8, 8, 0, 0, false)
 {
 }

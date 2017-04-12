@@ -23,10 +23,10 @@ class GameObject {
 		std::vector <int> textures;
 		std::vector <Debugger> debuggers;
 	public:
-		GameObject (std::vector <int> textures, int maxSpriteFrames, int x, int y,
-		            int w, int h, float stretchW, float stretchH, bool collidable);
+		GameObject (const std::vector <int> textures, const int maxSpriteFrames, const int x, const int y,
+		            const int w, const int h, const float stretchW, const float stretchH, const bool collidable);
 		virtual ~GameObject ();
-		virtual void render (int offsetX, int offsetY);
+		virtual void render (const int offsetX, const int offsetY);
 		virtual void prepareFrame ();
 		bool isCollidable ();
 		bool toBeRemoved ();

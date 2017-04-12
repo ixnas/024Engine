@@ -4,7 +4,7 @@
 
 #include "../include/GroundMiddleRight.h"
 
-GroundMiddleRight::GroundMiddleRight (int x, int y)
+GroundMiddleRight::GroundMiddleRight (const int x, const int y)
 : GameObject (AssetLoader::instance ()->getGroundAssetMiddleRight (), 3, x, y, 4, 4, 0, 0, true)
 {
 

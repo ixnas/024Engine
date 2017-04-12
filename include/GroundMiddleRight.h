@@ -9,7 +9,7 @@
 
 class GroundMiddleRight : public GameObject {
 	public:
-		GroundMiddleRight (int x, int y);
+		GroundMiddleRight (const int x, const int y);
 };
 
 

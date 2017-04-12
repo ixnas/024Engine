@@ -22,7 +22,7 @@ class CollisionController {
 		bool checkCollisionTop ();
 		bool checkCollisionBottom ();
 		void setPlayerValues (const int playerX, const int playerY, const int playerW, const int playerH);
-		void getObjectValues (int index);
+		void getObjectValues (const int index);
 	public:
 		CollisionController ();
 		~CollisionController ();

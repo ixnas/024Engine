@@ -9,7 +9,7 @@
 
 class Crate : public GameObject {
 	public:
-		Crate (int x, int y);
+		Crate (const int x, const int y);
 };
 
 #endif

@@ -37,7 +37,7 @@ void Character::changeState (int state) {
 	}
 }
 
-Character::Character (int maxSpriteFrames, int x, int y, int w, int h, float stretchW, float stretchH)
+Character::Character (const int maxSpriteFrames, const int x, const int y, const int w, const int h, const float stretchW, const float stretchH)
 : GameObject (std::vector <int> (), maxSpriteFrames, x, y, w, h, stretchW, stretchH, true)
 , state (STATE_WRIGHT)
 {

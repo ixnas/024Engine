@@ -37,7 +37,7 @@ void GameObject::drawDebug (const int offsetX, const int offsetY) {
 	}
 }
 
-GameObject::GameObject (std::vector <int> textures, int maxSpriteFrames, int x, int y, int w, int h, float stretchW, float stretchH, bool collidable)
+GameObject::GameObject (const std::vector <int> textures, const int maxSpriteFrames, const int x, const int y, const int w, const int h, const float stretchW, const float stretchH, const bool collidable)
 : x (GraphicsEngine::instance ()->getBlockSizeX () * x)
 , y (GraphicsEngine::instance ()->getBlockSizeY () * y)
 , w (GraphicsEngine::instance ()->getBlockSizeX () * w)
@@ -56,7 +56,7 @@ GameObject::GameObject (std::vector <int> textures, int maxSpriteFrames, int x, 
 GameObject::~GameObject () {
 }
 
-void GameObject::render (int offsetX, int offsetY) {
+void GameObject::render (const int offsetX, const int offsetY) {
 	drawTexture (offsetX, offsetY);
 
 	if (debuggersEnabled ()) {

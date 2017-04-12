@@ -8,7 +8,7 @@ void Bullet::destroyTargets () {
 	}
 }
 
-Bullet::Bullet (std::shared_ptr <CollisionController> collisionController, int x, int y, int acceleration)
+Bullet::Bullet (std::shared_ptr <CollisionController> collisionController, const int x, const int y, const int acceleration)
 : GameObject (AssetLoader::instance ()->getMushroomAsset (), 60, x, y, 2, 2, 0, 0, false)
 , collisionController (collisionController)
 , acceleration (acceleration)

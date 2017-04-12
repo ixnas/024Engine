@@ -26,9 +26,9 @@ class Character : public GameObject {
 		std::vector <int> texturesWalkRight;
 		std::vector <int> texturesJumpLeft;
 		std::vector <int> texturesJumpRight;
-		void changeState (int state);
+		void changeState (const int state);
 	public:
-		Character (int maxSpriteFrames, int x, int y, int w, int h, float stretchW, float stretchH);
+		Character (const int maxSpriteFrames, const int x, const int y, const int w, const int h, const float stretchW, const float stretchH);
 		virtual ~Character ();
 		virtual void prepareFrame ();
 };

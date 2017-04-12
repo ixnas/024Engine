@@ -9,7 +9,7 @@
 
 class PlatformMiddle : public GameObject {
 	public:
-		PlatformMiddle (int x, int y);
+		PlatformMiddle (const int x, const int y);
 };
 
 

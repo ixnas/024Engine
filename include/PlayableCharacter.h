@@ -21,9 +21,9 @@ class PlayableCharacter : public MovableCharacter {
 		const int keyJump;
 	public:
 		PlayableCharacter (std::shared_ptr <InputController> inputController,
-		                   std::shared_ptr <CollisionController> collisionController, int keyLeft, int keyRight, int keyJump,
-		                   int maxSpriteFrames, int maxJumpFrames, int maxWalkingSpeed, int maxJumpingSpeed,
-		                   int maxFallingSpeed, int x, int y, int w, int h, float stretchW, float stretchH);
+		                   std::shared_ptr <CollisionController> collisionController, const int keyLeft, const int keyRight, const int keyJump,
+		                   const int maxSpriteFrames, const int maxJumpFrames, const int maxWalkingSpeed, const int maxJumpingSpeed,
+		                   const int maxFallingSpeed, const int x, const int y, const int w, const int h, const float stretchW, const float stretchH);
 		~PlayableCharacter ();
 };
 

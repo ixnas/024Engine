@@ -4,7 +4,7 @@
 
 #include "../include/Bush2.h"
 
-Bush2::Bush2 (int x, int y)
+Bush2::Bush2 (const int x, const int y)
 		: GameObject (AssetLoader::instance ()->getBushAsset2 (), 3, x, y, 4, 2, 0, 0, false)
 {
 }

@@ -41,8 +41,8 @@ class MovableCharacter : public Character {
 		void decelerate ();
 	public:
 		MovableCharacter (std::shared_ptr <CollisionController> collisionController,
-		               int maxSpriteFrames, int maxJumpFrames, int maxWalkingSpeed, int maxJumpingSpeed,
-		               int maxFallingSpeed, int x, int y, int w, int h, float stretchW, float stretchH);
+		               const int maxSpriteFrames, const int maxJumpFrames, const int maxWalkingSpeed, const int maxJumpingSpeed,
+		               const int maxFallingSpeed, const int x, const int y, const int w, const int h, const float stretchW, const float stretchH);
 		void prepareFrame ();
 };
 

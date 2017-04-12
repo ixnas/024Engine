@@ -9,7 +9,7 @@
 
 class Explosion : public TemporaryGameObject {
 	public:
-		Explosion (int x, int y, int w, int h);
+		Explosion (const int x, const int y, const int w, const int h);
 		virtual ~Explosion ();
 };
 

@@ -11,7 +11,7 @@ class Bullet: public GameObject {
 		int acceleration;
 		void destroyTargets ();
 	public:
-		Bullet (std::shared_ptr <CollisionController> collisionController, int x, int y, int acceleration);
+		Bullet (std::shared_ptr <CollisionController> collisionController, const int x, const int y, const int acceleration);
 		~Bullet ();
 		void prepareFrame () override;
 		bool canReincarnate () override;

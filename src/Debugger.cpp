@@ -1,6 +1,6 @@
 #include "../include/Debugger.h"
 
-Debugger::Debugger (const char *name, int *value, const int min, const int max) {
+Debugger::Debugger (std::string name, int *value, const int min, const int max) {
 	this->name = GraphicsEngine::instance ()->loadText (0, name, 0, 0, 0);
 	this->value = value;
 	for (int i = min; i <= max; i++) {

@@ -4,7 +4,7 @@
 
 #include "../include/Crate.h"
 
-Crate::Crate (int x, int y)
+Crate::Crate (const int x, const int y)
 : GameObject (AssetLoader::instance ()->getCrateAsset (), 3, x, y, 2, 2, 0, 0, true)
 {
 }

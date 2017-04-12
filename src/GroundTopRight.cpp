@@ -4,7 +4,7 @@
 
 #include "../include/GroundTopRight.h"
 
-GroundTopRight::GroundTopRight (int x, int y)
+GroundTopRight::GroundTopRight (const int x, const int y)
 : GameObject (AssetLoader::instance ()->getGroundAssetTopRight (), 3, x, y, 4, 4, 0, 0, true)
 {
 

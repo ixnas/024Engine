@@ -104,7 +104,7 @@ void Game::prepareObjects (std::shared_ptr <std::vector <std::shared_ptr <GameOb
 	}
 }
 
-Game::Game (std::shared_ptr <InputController> inputController, std::shared_ptr <CollisionController> collisionController, std::unique_ptr <Camera> camera, int background)
+Game::Game (std::shared_ptr <InputController> inputController, std::shared_ptr <CollisionController> collisionController, std::unique_ptr <Camera> camera, const int background)
 : inputController (inputController)
 , gameObjects (std::make_shared <std::vector <std::shared_ptr <GameObject> > > ())
 , gameObjectsForeground (std::make_shared <std::vector <std::shared_ptr <GameObject> > > ())

@@ -9,7 +9,7 @@
 
 class Bush2 : public GameObject{
 	public:
-		Bush2 (int x, int y);
+		Bush2 (const int x, const int y);
 
 };
 

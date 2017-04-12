@@ -9,7 +9,7 @@
 
 class PlatformLeft : public GameObject {
 	public:
-		PlatformLeft (int x, int y);
+		PlatformLeft (const int x, const int y);
 };
 
 #endif //CLION_SDL_PLATFORMLEFT_H

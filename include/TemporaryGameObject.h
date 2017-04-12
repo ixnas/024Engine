@@ -14,7 +14,7 @@ class TemporaryGameObject : public GameObject {
 		bool reachedLifeLimit ();
 		void nextLifeFrame ();
 	public:
-		TemporaryGameObject (std::vector <int> textures, int maxSpriteFrames, int maxLifeFrames, int x, int y, int w, int h, float stretchW, float stretchH, bool collidable);
+		TemporaryGameObject (std::vector <int> textures, const int maxSpriteFrames, const int maxLifeFrames, const int x, const int y, const int w, const int h, const float stretchW, const float stretchH, const bool collidable);
 		virtual ~TemporaryGameObject ();
 		void prepareFrame ();
 };
