@@ -23,7 +23,6 @@ class Game {
 		int watermark;
 		void setCamera ();
 		void prepareCameraAndObjects ();
-		void syncTime ();
 		bool checkObjectWithinCamera (const int objectX, const int objectY, const int objectW, const int objectH);
 		void drawObjects (std::shared_ptr <std::vector <std::shared_ptr <GameObject> > > objects);
 		void drawBackground ();

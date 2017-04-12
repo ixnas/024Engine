@@ -1,5 +1,4 @@
 #include "../include/Debugger.h"
-#include <iostream>
 
 Debugger::Debugger (const char *name, int *value, const int min, const int max) {
 	this->name = GraphicsEngine::instance ()->loadText (0, name, 0, 0, 0);
@@ -17,7 +16,7 @@ int Debugger::getName () {
 }
 
 int Debugger::getValue () {
-	int index;
+	int index = 0;
 
 	for (int i = 0; i < values.size (); i++) {
 		if (values [i] == *value) {

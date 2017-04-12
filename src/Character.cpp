@@ -31,6 +31,8 @@ void Character::changeState (int state) {
 			case STATE_JRIGHT:
 				textures = texturesJumpRight;
 				break;
+			default:
+				break;
 		}
 	}
 }

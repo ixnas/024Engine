@@ -153,7 +153,6 @@ int GraphicsEngine::loadMedia (const char* path) {
 		} else {
 			textures.push_back (texture);
 			SDL_FreeSurface (image);
-			image = NULL;
 			std::cout << "Texture loaded. (ID = " << textures.size ()-1 << ", path = \"" << path << "\")" << std::endl;
 			return textures.size ()-1;
 		}
@@ -242,7 +241,7 @@ void GraphicsEngine::drawTexture (const int textureNumber, const int x, const in
 	SDL_RenderCopy (renderer, textures [textureNumber], NULL, &dest);
 }
 
-void GraphicsEngine::drawBox (const int x, const int y, const int w, const int h, const int r, const int g, const int b) {
+void GraphicsEngine::drawBox (const int x, const int y, const int w, const int h, const Uint8 r, const Uint8 g, const Uint8 b) {
 	SDL_SetRenderDrawColor (renderer, r, g, b, 255);
 
 	SDL_Rect rectangle;

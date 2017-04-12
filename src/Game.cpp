@@ -2,7 +2,6 @@
 #include <cassert>
 #include <iostream>
 #include <thread>
-#include <functional>
 
 void Game::setCamera () {
 	auto freeCameraSpeed = 10;

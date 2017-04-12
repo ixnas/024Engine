@@ -42,7 +42,7 @@ class GraphicsEngine {
 		void refreshScreen ();
 		void setViewport (const int x, const int y, const int w, const int h);
 		void drawTexture (const int textureNumber, const int x, const int y, const int w, const int h);
-		void drawBox (const int x, const int y, const int w, const int h, const int r, const int g, const int b);
+		void drawBox (const int x, const int y, const int w, const int h, const Uint8 r, const Uint8 g, const Uint8 b);
 		void drawText (const int fontnumber, std::string textToDraw, const int x, const int y);
 };
 
