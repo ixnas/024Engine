@@ -16,7 +16,7 @@ void Game::setCamera () {
 			camera->shiftV (freeCameraSpeed);
 		}
 	} else {
-		if (players->size () > 0) {
+		if (!players->empty ()) {
 			auto x = (*players) [0]->getX ()-GraphicsEngine::instance ()->getFrameWidth ()/3;
 			auto y = (*players) [0]->getY ()-GraphicsEngine::instance ()->getFrameHeight ()/20*11;
 			if (x > 0) {
@@ -81,7 +81,7 @@ void Game::drawWatermark () {
 }
 
 void Game::prepareObjects (std::shared_ptr <std::vector <std::shared_ptr <GameObject> > > objects) {
-	assert (objects != NULL);
+	assert (objects != nullptr);
 
 	for (int i = 0; i < (*objects).size (); i++) {
 		auto object = (*objects) [i];
@@ -134,16 +134,16 @@ void Game::loop () {
 }
 
 void Game::addGameObject (std::shared_ptr <GameObject> gameObject) {
-	assert (gameObject != NULL);
+	assert (gameObject != nullptr);
 	gameObjects->push_back (gameObject);
 }
 
 void Game::addGameObjectForeground (std::shared_ptr <GameObject> gameObject) {
-	assert (gameObject != NULL);
+	assert (gameObject != nullptr);
 	gameObjectsForeground->push_back (gameObject);
 }
 
 std::shared_ptr <CollisionController> Game::getCollisionController () {
-	assert (collisionController != NULL);
+	assert (collisionController != nullptr);
 	return collisionController;
 }

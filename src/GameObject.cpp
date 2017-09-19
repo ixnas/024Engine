@@ -86,7 +86,7 @@ bool GameObject::canReincarnate () {
 }
 
 std::shared_ptr <GameObject> GameObject::getReincarnation () {
-	return NULL;
+	return nullptr;
 }
 
 int GameObject::getX () {
