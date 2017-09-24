@@ -17,11 +17,11 @@ class GraphicsEngine {
 		SDL_Renderer* renderer;
 		std::vector <SDL_Texture*> textures;
 		std::vector <TTF_Font*> fonts;
-		bool initVideo ();
-		bool initWindow (const char* title);
-		bool initImgLoader ();
-		bool initFontLoader ();
-		bool initRenderer ();
+		void initVideo ();
+		void initWindow (const char* title);
+		void initImgLoader ();
+		void initFontLoader ();
+		void initRenderer ();
 		void quitRenderer ();
 		void quitWindow ();
 		void quitSDL ();

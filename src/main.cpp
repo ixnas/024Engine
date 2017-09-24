@@ -114,7 +114,12 @@ int main () {
 
 	/* Initialize engine components */
 	SDL_Event sdl_event;
-	GraphicsEngine::instance (TITLE, RESOLUTION_X, RESOLUTION_Y, BLOCKS_X, BLOCKS_Y);
+	try {
+		GraphicsEngine::instance (TITLE, RESOLUTION_X, RESOLUTION_Y, BLOCKS_X, BLOCKS_Y);
+	} catch (std::string error) {
+		std::cout << "[GraphicsEngine] Error: " << error << std::endl;
+		return 1;
+	}
 	//chdir (SDL_GetBasePath ());
 
 	drawTitleScreen ();

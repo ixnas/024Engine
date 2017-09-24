@@ -3,57 +3,48 @@
 #include <vector>
 #include "../include/GraphicsEngine.h"
 
-bool GraphicsEngine::initVideo () {
+void GraphicsEngine::initVideo () {
 	if (SDL_Init (SDL_INIT_VIDEO) < 0) {
-		return false;
-	} else {
-		return true;
+		throw std::string ("Couldn't initialize video");
 	}
 }
 
-bool GraphicsEngine::initWindow (const char* title) {
+void GraphicsEngine::initWindow (const char* title) {
 	window = SDL_CreateWindow (title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (window == nullptr) {
-		std::cout << "Could not initialize video: " << SDL_GetError () << std::endl;
-		return false;
+		throw std::string ("Could not initialize window: " + (std::string) SDL_GetError ());
 	} else {
 		std::cout << "Video initialized." << std::endl;
-		return true;
 	}
 }
 
-bool GraphicsEngine::initImgLoader () {
+void GraphicsEngine::initImgLoader () {
 	int imgFlags = IMG_INIT_PNG;
 	if (!(IMG_Init (imgFlags) & imgFlags)) {
-		std::cout << "IMG loader failed to load: " << IMG_GetError () << std::endl;
-		return false;
+		throw std::string ("IMG loader failed to load: " + (std::string) IMG_GetError ());
 	} else {
 		std::cout << "IMG loader initialized." << std::endl;
-		return true;
 	}
 }
 
-bool GraphicsEngine::initFontLoader () {
+void GraphicsEngine::initFontLoader () {
 	if (TTF_Init () == -1) {
-		std::cout << "Font loader failed to load: " << TTF_GetError () << std::endl;
-		return false;
+		throw std::string ("Font loader failed to load: " + (std::string) TTF_GetError ());
 	} else {
 		std::cout << "Font loader initialized." << std::endl;
-		return true;
 	}
 }
 
-bool GraphicsEngine::initRenderer () {
+void GraphicsEngine::initRenderer () {
 	renderer = SDL_CreateRenderer (window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (renderer == nullptr) {
 		std::cout << "Renderer failed to load: " << SDL_GetError () << std::endl;
-		return false;
+		throw std::string ("Renderer failed to load: " + (std::string) SDL_GetError ());
 	} else {
 		std::cout << "Renderer initialized." << std::endl;
 		SDL_RenderSetLogicalSize (renderer, FRAME_WIDTH, FRAME_HEIGHT);
 		SDL_SetHint (SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 		SDL_SetRenderDrawColor (renderer, 0x00, 0x00, 0x00, 0x00);
-		return true;
 	}
 }
 
@@ -101,15 +92,11 @@ GraphicsEngine::GraphicsEngine (const char* title, const int width, const int he
 	std::cout << "===== 024 Game Engine =====" << std::endl;
 	std::cout << "  v0.1 by Sjoerd Scheffer  " << std::endl;
 	std::cout << "===========================" << std::endl;
-	if (initVideo ()) {
-		if (initWindow (title)) {
-			if (initImgLoader ()) {
-				if (initFontLoader ()) {
-					initRenderer ();
-				}
-			}
-		}
-	}
+	initVideo ();
+	initWindow (title);
+	initImgLoader ();
+	initFontLoader ();
+	initRenderer ();
 
 	//SDL_SetWindowFullscreen (window, SDL_WINDOW_FULLSCREEN_DESKTOP);
 }
