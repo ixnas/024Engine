@@ -2,10 +2,10 @@
 #define GAMEOBJECT_H
 
 #include "../include/GraphicsEngine.h"
-#include "../include/Debugger.h"
 #include "../include/AssetLoader.h"
 #include <vector>
 
+/*
 class GameObject {
 	private:
 		bool reachedFrameLimit ();
@@ -43,5 +43,6 @@ class GameObject {
 		int getStretchedW ();
 		int getStretchedH ();
 };
+ */
 
 #endif

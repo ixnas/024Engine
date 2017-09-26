@@ -1,6 +1,7 @@
 #include "../include/GameObject.h"
 #include <iostream>
 
+/*
 bool GameObject::reachedFrameLimit () {
 	return passedSpriteFrames >= maxSpriteFrames;
 }
@@ -124,3 +125,4 @@ int GameObject::getStretchedH () {
 bool GameObject::reincarnateIntoForeground () {
 	return false;
 }
+ */

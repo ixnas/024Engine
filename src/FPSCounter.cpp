@@ -4,27 +4,28 @@
 
 #include "../include/FPSCounter.h"
 
-FPSCounter::FPSCounter ()
-: start (time (0))
+FPSCounter::FPSCounter (std::shared_ptr <GraphicsEngine> graphicsEngine)
+: graphicsEngine (graphicsEngine)
+, start (time (0))
 , time_difference (difftime (time (0), start))
 , fps (0)
 , passedFrames (0)
 {
-	std::cout << "FPSCounter initialized" << std::endl;
+	std::cout << "[FPSCounter] Initialized" << std::endl;
 }
 
 FPSCounter::~FPSCounter () {
-	std::cout << "FPSCounter stopped" << std::endl;
+	std::cout << "[FPSCounter] Stopped" << std::endl;
 }
 
 void FPSCounter::showFPS () {
 	(passedFrames)++;
-	time_difference = difftime (time (0), start);
+	time_difference = difftime (time (nullptr), start);
 
 	if (time_difference >= 1) {
 		fps = passedFrames;
 		passedFrames = 0;
-		start = time (0);
+		start = time (nullptr);
 	}
-	GraphicsEngine::instance ()->drawText (1, std::to_string (fps), 30, 30);
+	graphicsEngine->drawText (0, std::to_string (fps), 30, 30, 255, 255, 255);
 }

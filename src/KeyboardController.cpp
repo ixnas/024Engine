@@ -2,11 +2,11 @@
 #include <iostream>
 
 KeyboardController::KeyboardController () {
-	std::cout << "KeyboardController initialized." << std::endl;
+	std::cout << "[KeyboardController] Initialized" << std::endl;
 }
 
 KeyboardController::~KeyboardController () {
-	std::cout << "KeyboardController stopped." << std::endl;
+	std::cout << "[KeyboardController] Stopped" << std::endl;
 }
 
 void KeyboardController::pressKey (const int key) {
@@ -42,7 +42,7 @@ bool KeyboardController::keyPressed (const int key) {
 
 void KeyboardController::printKeys () {
 	for (int i = 0; i < keysPressed.size (); i++) {
-		std::cout << "Ingedrukt: " << keysPressed [i] << " ";
+		std::cout << "Pressed: " << keysPressed [i] << " ";
 	}
 	std::cout << std::endl;
 }

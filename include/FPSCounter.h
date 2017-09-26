@@ -9,18 +9,17 @@
 #include <iostream>
 #include "../include/GraphicsEngine.h"
 
-
 class FPSCounter {
 	private:
+		std::shared_ptr <GraphicsEngine> graphicsEngine;
 		time_t start;
 		double time_difference;
 		int fps;
 		int passedFrames;
 	public:
-		FPSCounter ();
+		FPSCounter (std::shared_ptr <GraphicsEngine> graphicsEngine);
 		~FPSCounter ();
 		void showFPS ();
 };
-
 
 #endif //CLION_SDL_FPSCOUNTER_H

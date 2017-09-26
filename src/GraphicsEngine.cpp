@@ -1,20 +1,24 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <chrono>
+#include <thread>
 #include "../include/GraphicsEngine.h"
 
 void GraphicsEngine::initVideo () {
 	if (SDL_Init (SDL_INIT_VIDEO) < 0) {
 		throw std::string ("Couldn't initialize video");
+	} else {
+		std::cout << "[GrahpicsEngine] Video initialized." << std::endl;
 	}
 }
 
-void GraphicsEngine::initWindow (const char* title) {
-	window = SDL_CreateWindow (title, SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
+void GraphicsEngine::initWindow (const std::string title) {
+	window = SDL_CreateWindow (title.c_str (), SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 	if (window == nullptr) {
 		throw std::string ("Could not initialize window: " + (std::string) SDL_GetError ());
 	} else {
-		std::cout << "Video initialized." << std::endl;
+		std::cout << "[GrahpicsEngine] Window initialized." << std::endl;
 	}
 }
 
@@ -23,7 +27,7 @@ void GraphicsEngine::initImgLoader () {
 	if (!(IMG_Init (imgFlags) & imgFlags)) {
 		throw std::string ("IMG loader failed to load: " + (std::string) IMG_GetError ());
 	} else {
-		std::cout << "IMG loader initialized." << std::endl;
+		std::cout << "[GrahpicsEngine] IMG loader initialized." << std::endl;
 	}
 }
 
@@ -31,17 +35,16 @@ void GraphicsEngine::initFontLoader () {
 	if (TTF_Init () == -1) {
 		throw std::string ("Font loader failed to load: " + (std::string) TTF_GetError ());
 	} else {
-		std::cout << "Font loader initialized." << std::endl;
+		std::cout << "[GrahpicsEngine] Font loader initialized." << std::endl;
 	}
 }
 
 void GraphicsEngine::initRenderer () {
 	renderer = SDL_CreateRenderer (window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (renderer == nullptr) {
-		std::cout << "Renderer failed to load: " << SDL_GetError () << std::endl;
 		throw std::string ("Renderer failed to load: " + (std::string) SDL_GetError ());
 	} else {
-		std::cout << "Renderer initialized." << std::endl;
+		std::cout << "[GrahpicsEngine] Renderer initialized." << std::endl;
 		SDL_RenderSetLogicalSize (renderer, FRAME_WIDTH, FRAME_HEIGHT);
 		SDL_SetHint (SDL_HINT_RENDER_SCALE_QUALITY, "linear");
 		SDL_SetRenderDrawColor (renderer, 0x00, 0x00, 0x00, 0x00);
@@ -51,41 +54,27 @@ void GraphicsEngine::initRenderer () {
 void GraphicsEngine::quitRenderer () {
 	SDL_DestroyRenderer (renderer);
 	renderer = nullptr;
-	std::cout << "  Stopped renderer" << std::endl;
+	std::cout << "[GrahpicsEngine]   Stopped renderer" << std::endl;
 }
 
 void GraphicsEngine::quitWindow () {
 	SDL_DestroyWindow (window);
 	window = nullptr;
-	std::cout << "  Deleted window" << std::endl;
+	std::cout << "[GrahpicsEngine]   Deleted window" << std::endl;
 }
 
 void GraphicsEngine::quitSDL () {
 	TTF_Quit ();
 	IMG_Quit ();
 	SDL_Quit ();
-	std::cout << "Done" << std::endl;
+	std::cout << "[GrahpicsEngine] Stopped" << std::endl;
 }
 
-GraphicsEngine *GraphicsEngine::instance () {
-	return s_instance;
-};
-
-GraphicsEngine * GraphicsEngine::instance (const char *title, const int width, const int height, const int blockX, const int blockY) {
-	if (s_instance == nullptr) {
-		s_instance = new GraphicsEngine (title, width, height, blockX, blockY);
-	}
-	return s_instance;
-}
-
-
-GraphicsEngine::GraphicsEngine (const char* title, const int width, const int height, const int blockX, const int blockY)
+GraphicsEngine::GraphicsEngine (const std::string title, const int width, const int height)
 	: SCREEN_WIDTH (width)
 	, SCREEN_HEIGHT (height)
-	, FRAME_WIDTH (640)
-	, FRAME_HEIGHT (360)
-	, blockX (FRAME_WIDTH / blockX)
-	, blockY (FRAME_HEIGHT / blockY)
+	, FRAME_WIDTH (width)
+	, FRAME_HEIGHT (height)
 	, window (nullptr)
 	, renderer (nullptr)
 {
@@ -102,7 +91,7 @@ GraphicsEngine::GraphicsEngine (const char* title, const int width, const int he
 }
 
 GraphicsEngine::~GraphicsEngine () {
-	std::cout << "Freeing up resources..." << std::endl;
+	std::cout << "[GraphicsEngine] Freeing up resources..." << std::endl;
 	clearTextures ();
 	clearFonts ();
 	quitRenderer ();
@@ -118,29 +107,21 @@ int GraphicsEngine::getFrameHeight () {
 	return FRAME_HEIGHT;
 }
 
-int GraphicsEngine::getBlockSizeX () {
-	return blockX;
-}
-
-int GraphicsEngine::getBlockSizeY () {
-	return blockY;
-}
-
-int GraphicsEngine::loadMedia (const char* path) {
+int GraphicsEngine::loadMedia (const std::string path) {
 	SDL_Texture* texture = nullptr;
-	SDL_Surface* image = IMG_Load (path);
+	SDL_Surface* image = IMG_Load (path.c_str ());
 	if (image == nullptr) {
-		std::cout << "Couldn't load image: " << IMG_GetError () << std::endl;
+		std::cout << "[GrahpicsEngine] Couldn't load image: " << IMG_GetError () << std::endl;
 		return -1;
 	} else {
 		texture = SDL_CreateTextureFromSurface (renderer, image);
 		if (texture == nullptr) {
-			std::cout << "Couldn't load texture: " << SDL_GetError () << std::endl;
+			std::cout << "[GrahpicsEngine] Couldn't load texture: " << SDL_GetError () << std::endl;
 			return -1;
 		} else {
 			textures.push_back (texture);
 			SDL_FreeSurface (image);
-			std::cout << "Texture loaded. (ID = " << textures.size ()-1 << ", path = \"" << path << "\")" << std::endl;
+			std::cout << "[GrahpicsEngine] Texture loaded. (ID = " << textures.size ()-1 << ", path = \"" << path << "\")" << std::endl;
 			return textures.size ()-1;
 		}
 	}
@@ -151,13 +132,13 @@ int GraphicsEngine::loadText (const int fontnumber, const std::string text, cons
 	SDL_Surface *surfaceMessage = TTF_RenderText_Solid (fonts [fontnumber], text.c_str (), color);
 	SDL_Texture *textureMessage = nullptr;
 	if (surfaceMessage == nullptr) {
-		std::cout << "Couldn't render text: " << TTF_GetError () << std::endl;
+		std::cout << "[GrahpicsEngine] Couldn't render text: " << TTF_GetError () << std::endl;
 		return -1;
 	} else {
 		textureMessage = SDL_CreateTextureFromSurface (renderer, surfaceMessage);
 		SDL_FreeSurface (surfaceMessage);
 		if (textureMessage == nullptr) {
-			std::cout << "Could not load texture: " << TTF_GetError () << std::endl;
+			std::cout << "[GrahpicsEngine] Could not load texture: " << TTF_GetError () << std::endl;
 			return -1;
 		} else {
 			textures.push_back (textureMessage);
@@ -167,27 +148,30 @@ int GraphicsEngine::loadText (const int fontnumber, const std::string text, cons
 };
 
 
-int GraphicsEngine::loadFont (const char* path, const int size) {
-	TTF_Font* font = TTF_OpenFont (path, size);
+int GraphicsEngine::loadFont (const std::string path, const int size) {
+	TTF_Font* font = TTF_OpenFont (path.c_str (), size);
 	if (font == nullptr) {
-		std::cout << "Could not load font: " << TTF_GetError () << std::endl;
+		std::cout << "[GrahpicsEngine] Could not load font: " << TTF_GetError () << std::endl;
 		return -1;
 	} else {
 		fonts.push_back (font);
-		std::cout << "Font loaded. (ID = " << fonts.size ()-1 << ", path = \"" << path << "\")" << std::endl;
+		std::cout << "[GrahpicsEngine] Font loaded. (ID = " << fonts.size ()-1 << ", path = \"" << path << "\")" << std::endl;
 		return fonts.size () - 1;
 	}
 }
 
 void GraphicsEngine::clearTextures () {
-	int numberOfTextures = textures.size ();
+	int numberOfTextures = 0;
 	if (textures.size () > 0) {
 		for (int i = 0; i < textures.size (); i++) {
-			SDL_DestroyTexture (textures [i]);
-			textures [i] = nullptr;
+			if (textures [i] != nullptr) {
+				numberOfTextures++;
+				SDL_DestroyTexture (textures [i]);
+				textures [i] = nullptr;
+			}
 		}
 	}
-	std::cout << "  Removed " << numberOfTextures << " textures" << std::endl;
+	std::cout << "[GrahpicsEngine]   Removed " << numberOfTextures << " textures" << std::endl;
 	textures.clear ();
 }
 
@@ -196,7 +180,7 @@ void GraphicsEngine::clearFonts () {
 		for (int i = 0; i < fonts.size (); i++) {
 			TTF_CloseFont (fonts [i]);
 			fonts [i] = nullptr;
-			std::cout << "  Removed font: " << i << std::endl;
+			std::cout << "[GrahpicsEngine]   Removed font: " << i << std::endl;
 		}
 	}
 	fonts.clear ();
@@ -241,8 +225,8 @@ void GraphicsEngine::drawBox (const int x, const int y, const int w, const int h
 	SDL_SetRenderDrawColor (renderer, 0, 0, 0, 255);
 }
 
-void GraphicsEngine::drawText (const int fontnumber, std::string textToDraw, const int x, const int y) {
-	SDL_Color textColor = {255, 0, 0};
+void GraphicsEngine::drawText (const int fontnumber, std::string textToDraw, const int x, const int y, const Uint8 r, const Uint8 g, const Uint8 b) {
+	SDL_Color textColor = {r, g, b};
 	SDL_Surface* textSurface = TTF_RenderText_Solid (fonts [fontnumber], textToDraw.c_str(), textColor);
 	SDL_Texture* text = SDL_CreateTextureFromSurface (renderer, textSurface);
 	int text_width = textSurface->w;
@@ -251,5 +235,18 @@ void GraphicsEngine::drawText (const int fontnumber, std::string textToDraw, con
 	SDL_Rect renderQuad = {x, y, text_width, text_height};
 	SDL_RenderCopy(renderer, text, nullptr, &renderQuad);
 	SDL_DestroyTexture(text);
+}
+
+void GraphicsEngine::removeTexture (const int textureNumber) {
+	if (textures.size () > textureNumber) {
+		if (textures [textureNumber] != nullptr) {
+			SDL_DestroyTexture (textures [textureNumber]);
+			textures [textureNumber] = nullptr;
+		} else {
+			throw std::string ("Not a valid texture number");
+		}
+	} else {
+		throw std::string ("Not a valid texture number");
+	}
 }
 

@@ -12,27 +12,14 @@ set(CMAKE_CXX_STANDARD 14)
 set(SOURCE_FILES
         src/KeyboardController.cpp
         src/Camera.cpp
-        src/CollisionController.cpp
-        src/Game.cpp
         src/GameObject.cpp
         src/GraphicsEngine.cpp
         src/main.cpp
-        src/MovableCharacter.cpp
-        src/PlayableCharacter.cpp
-        src/Tree.cpp
-        src/Character.cpp
-        src/Debugger.cpp
-        src/Bullet.cpp
-        include/TemporaryGameObject.h
-        src/TemporaryGameObject.cpp
         src/AssetLoader.cpp
         include/AssetLoader.h
         src/Asset.cpp
         include/Asset.h
-        src/Crate.cpp
-        include/Crate.h
-        src/Explosion.cpp
-        include/Explosion.h src/Bush.cpp include/Bush.h src/Bush2.cpp src/GroundTop.cpp include/GroundTop.h src/GroundMiddle.cpp include/GroundMiddle.h src/GroundTopLeft.cpp include/GroundTopLeft.h src/GroundMiddleLeft.cpp include/GroundMiddleLeft.h src/GroundTopRight.cpp include/GroundTopRight.h src/GroundMiddleRight.cpp include/GroundMiddleRight.h src/FPSCounter.cpp include/FPSCounter.h include/InputController.h include/PlatformLeft.h src/PlatformLeft.cpp src/PlatformMiddle.cpp include/PlatformMiddle.h src/PlatformRight.cpp include/PlatformRight.h src/InputControllerFactory.cpp include/InputControllerFactory.h)
+        src/FPSCounter.cpp include/FPSCounter.h include/InputController.h src/InputControllerFactory.cpp include/InputControllerFactory.h)
 
 include_directories(
         ${SDL2_INCLUDE_DIR}
